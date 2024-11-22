@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Inicio de Sesión";
+}
+
+<h2>Iniciar Sesión</h2>
+
+<form asp-action="Index" method="post">
+    <div>
+        <label>Nombre de Usuario:</label>
+        <input type="text" name="nombreUsuario" required />
+    </div>
+    <div>
+        <label>Contraseña:</label>
+        <input type="password" name="contraseña" required />
+    </div>
+    <button type="submit">Ingresar</button>
+
+    @if (ViewBag.Error != null)
+    {
+        <p style="color:red;">@ViewBag.Error</p>
+    }
+</form>
+
+<p>¿No tienes cuenta? <a asp-action="Register">Regístrate aquí</a>.</p>

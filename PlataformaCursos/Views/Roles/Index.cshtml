@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PlataformaCursos.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Asignar Roles";
+}
+
+<h2>Asignar Roles a Usuarios</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre de Usuario</th>
+            <th>Rol Actual</th>
+            <th>Asignar Nuevo Rol</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>@usuario.NombreUsuario</td>
+                <td>@usuario.Rol?.NombreRol</td>
+                <td>
+                    @foreach (var rol in (IEnumerable<PlataformaCursos.Models.Rol>)ViewBag.Roles)
+                    {
+                        <form asp-action="AsignarRol" method="post" style="display:inline;">
+                            <input type="hidden" name="usuarioId" value="@usuario.UsuarioId" />
+                            <input type="hidden" name="rolId" value="@rol.RolId" />
+                            <button type="submit" @(rol.RolId == usuario.RolId ? "disabled" : "")>
+                                @rol.NombreRol
+                            </button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
